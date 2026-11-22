@@ -1,7 +1,7 @@
 ---
 name: pack
 description: "Build a compact, verified chapter pack (60-second snapshot, recipes in the professor's method, 2-4 worked examples, formulas with given/remember markers, common traps) sized to 30-45 minutes. Argument: a chapter id, several ids, or tier-A."
-argument-hint: "<chapter id ... | tier-A>"
+argument-hint: "<chapter id ... | tier-A> [--rebuild]"
 disable-model-invocation: true
 allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
@@ -16,7 +16,9 @@ Let `TM` be `${CLAUDE_PLUGIN_ROOT}/scripts/tm`.
    chapter (`pdftotext` with the offset), the mapped lectures, assignments and past-paper questions, the corrections
    log, `progress/errors.md`. With more than 2 chapters, you may hand each chapter to a subagent with this brief;
    each must follow the course-context, figure-handling and verify-pass rules.
-4. Write `packs/<id>.tex` from `${CLAUDE_PLUGIN_ROOT}/templates/pack.tex` (format pdf) or `packs/<id>.md` from
+4. If `packs/<id>.tex` (or `.md`) already exists: with `--rebuild`, only recompile it (step 7). Otherwise write the
+   pack fresh from the current template, briefs and sources, after renaming the old file to `packs/<id>.prev.tex`.
+   Write `packs/<id>.tex` from `${CLAUDE_PLUGIN_ROOT}/templates/pack.tex` (format pdf) or `packs/<id>.md` from
    `pack.md.tmpl` (format md). Use only `tminus.sty` macros; ASCII only in .tex.
 5. Seed the drill deck `progress/deck/<id>.json` with the chapter's one-liners and question items (drill brief).
 6. Follow the verify-pass skill (claims file, recompute, source checks, report at the end of the pack).
