@@ -1,0 +1,39 @@
+% tminus cram-pack template (night before / morning of). No new material.
+\documentclass[11pt]{article}
+\usepackage{tminus}
+\tmsetcourse{<<COURSE_CODE>> <<COURSE_NAME>>}
+\tmsetdoc{Cram pack}
+\begin{document}
+% ---- page 1: must-remember formulas only
+\begin{tmonepage}[3]
+\section*{Must-remember formulas}
+\tmhead{<<CHAPTER>>}
+$<<FORMULA>>$\\
+\end{tmonepage}
+\newpage
+% ---- page 2: one-liners ordered by exam likelihood, then the student's weak items
+\begin{tmonepage}[3]
+\section*{One-liners}
+\tmhead{<<CHAPTER>>}
+\tmpt <<FACT>>
+\end{tmonepage}
+\newpage
+\section*{Top repeated mistakes}
+\begin{enumerate}
+  \item <<MISTAKE_FROM_ERRORS_MD>>
+\end{enumerate}
+\section*{Last paper, solved}
+\begin{tmexample}[<<PAPER>> Q<<N>> (<<MARKS>> marks)]
+<<QUESTION>>\par\textbf{Solution.} <<SOLUTION>>\tmans{<<ANSWER>>}
+\end{tmexample}
+\section*{Exam-day checklist}
+\begin{itemize}
+  \item Units on every answer; state assumptions and the standard values used.
+  \item Provided on the paper: <<GIVEN_FORMULAS_AND_TABLES>>.
+  \item Book policy: <<BOOK_POLICY>>.
+  \item <<CHECK>>
+\end{itemize}
+\begin{tmverify}
+Checked: <<N>> \quad Matched: <<N>> \quad Flagged: <<N>> \quad Unverifiable: <<N>>
+\end{tmverify}
+\end{document}
