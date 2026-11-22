@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -49,6 +50,32 @@ def _weights(over: dict | None) -> dict:
     return w
 
 
+def paper_year(pid: str, meta: dict):
+    if isinstance(meta.get("year"), int):
+        return meta["year"]
+    m = re.search(r"(?<!\d)(\d{4})(?!\d)", pid) or re.search(r"(?<!\d)(\d{2})(?!\d)", pid)
+    if not m:
+        return None
+    y = int(m.group(1))
+    return y if y > 999 else 2000 + y
+
+
+def paper_weights(papers: list[str], meta: dict, decay: float) -> dict:
+    """Explicit weight from course.md `papers:` if given, else decay^rank by year (same year, same rank)."""
+    years = {p: paper_year(p, meta.get(p) or {}) for p in papers}
+    distinct = sorted({y for y in years.values() if y is not None}, reverse=True)
+    rank = {y: i for i, y in enumerate(distinct)}
+    out = {}
+    for p in papers:
+        m = meta.get(p) or {}
+        if "weight" in m:
+            out[p] = float(m["weight"])
+        else:
+            r = rank.get(years[p], len(distinct))
+            out[p] = decay ** r
+    return out
+
+
 def study_days(course: dict, now, w: dict) -> list[dict]:
     """Calendar days from now until the exam day (exclusive) with their study minutes."""
     now, exam = _dt(now), _dt(course["front"]["exam_datetime"])
@@ -86,8 +113,10 @@ def score(course: dict, now=None, signals=None, weakmap=None, weights=None) -> d
     now = _dt(now or dt.datetime.now().replace(second=0, microsecond=0))
     signals = signals or {}
     chapters = course["chapters"]
-    papers = sorted({p["paper"] for ch in chapters for p in ch["past_papers"]}, reverse=True)
-    pw = {p: w["recency_decay"] ** i for i, p in enumerate(papers)}
+    pmeta = course["front"].get("papers") or {}
+    papers = sorted({p["paper"] for ch in chapters for p in ch["past_papers"]},
+                    key=lambda p: (-(paper_year(p, pmeta.get(p) or {}) or 0), p))
+    pw = paper_weights(papers, pmeta, w["recency_decay"])
     sum_w = sum(pw.values()) or 1.0
 
     # emphasis signals (defaults from course.md lecture/assignment counts)
@@ -156,12 +185,16 @@ def score(course: dict, now=None, signals=None, weakmap=None, weights=None) -> d
     cut_cost = sum(t["expected"] for t in topics if t["tier"] == "X")
 
     warnings = []
-    total = course["front"].get("paper_total")
     for p in papers:
+        meta = pmeta.get(p) or {}
+        if meta.get("partial"):
+            continue
+        total = meta.get("total", course["front"].get("paper_total"))
         s = sum(m for ch in chapters for pp in ch["past_papers"] if pp["paper"] == p for m in [pp["marks"]])
         if total and abs(s - total) > 1e-9:
             warnings.append(f"Paper {p}: tagged marks sum to {s:g}, not the paper total {total:g}. "
-                            "Some questions are untagged or double-counted in course.md.")
+                            "Some questions are untagged or double-counted in course.md; if part of this "
+                            "paper is out of scope, mark it `partial: true` under `papers:`.")
     if len(papers) >= 2:
         for t in topics:
             if len(t["by_paper"]) == 1:

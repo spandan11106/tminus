@@ -26,6 +26,9 @@ By content (keywords, formulas, figure types), not filename alone. For each mapp
 (high/medium/low). Past-paper cells use the exact format `<paper> <question> (<marks>)`, separated by `;`,
 e.g. `2024 Q2b (6); 2024 Q1(iv) (1)`. Split a mixed question (Q1 one-liners) across chapters part by part.
 Check: the tagged marks of each paper add up to its total (`paper_total`).
+Record every past paper under `papers:` in the front matter with its `year`. Midsems, quizzes and papers whose
+questions are partly out of scope get `partial: true` and a lower `weight` (default 0.5); papers with a different
+total get `total:`. Triage uses these for recency weights and the totals check.
 
 ## Emphasis signals (for triage)
 Write `sprint/signals.json`: `{"<chapter id>": {"slides": n, "flags": n, "assignments": n, "in_pattern": bool,

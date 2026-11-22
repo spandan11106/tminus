@@ -135,3 +135,24 @@ def test_cli_writes_outputs(tmp_path, course):
     assert (out / "triage.md").is_file() and (out / "plan.md").is_file()
     data = json.loads((out / "triage.json").read_text())
     assert data["topics"][0]["id"] == "D"
+
+
+def test_paper_ids_are_ordered_by_year_not_string(course):
+    # "Mid25" sorts after "End24" as a string; years must decide recency
+    for ch in course["chapters"]:
+        for p in ch["past_papers"]:
+            p["paper"] = {"2024": "Mid24", "2023": "End23"}[p["paper"]]
+    res = ts.score(course, now=NOW)
+    assert res["paper_weights"]["Mid24"] == pytest.approx(1.0)
+    assert res["paper_weights"]["End23"] == pytest.approx(0.7)
+
+
+def test_papers_block_weights_partial_and_totals(course):
+    course["front"]["papers"] = {"2024": {"year": 2024, "weight": 0.5, "partial": True},
+                                 "2023": {"year": 2023, "weight": 1.0}}
+    course["chapters"][0]["past_papers"][0]["marks"] = 12    # 2024 no longer sums to 50
+    res = ts.score(course, now=NOW)
+    assert res["paper_weights"] == {"2024": 0.5, "2023": 1.0}
+    assert not any("2024" in w and "sum to" in w for w in res["warnings"])   # partial: skip check
+    A = by_id(res)["A"]
+    assert A["expected_base"] == pytest.approx((0.5 * 12 + 1.0 * 10) / 1.5)

@@ -9,6 +9,9 @@ format: pdf                         # pdf | md   (doctor sets md if no TeX engin
 exam_pattern: |
   Describe the paper: sections, marks, choice ("any 5 of 7"), what is printed on the paper.
 paper_total: 50                     # marks in one paper; triage checks past papers sum to this
+papers:                             # optional, per past paper: year, weight (overrides recency), total, partial
+  2024: {year: 2024}
+  # Mid24: {year: 2024, weight: 0.5, partial: true}   # midsem / quiz / partly out-of-scope paper
 ---
 
 ## Book

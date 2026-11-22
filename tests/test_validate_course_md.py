@@ -93,3 +93,16 @@ def test_list_cells_keep_parenthesised_detail(tmp_path):
     t = TEMPLATE.read_text().replace("| L01, L02 | A1 |", "| L01, L02 | A1 (P1, P2), A2 (P3) |")
     c = v.load_valid(make(tmp_path, t))
     assert c["chapters"][0]["assignments"] == ["A1 (P1, P2)", "A2 (P3)"]
+
+
+def test_papers_block_validation(tmp_path):
+    t = TEMPLATE.read_text().replace("  2024: {year: 2024}", "  End25: {year: 2025, weight: 1.0}\n  Mid25: {year: 2025, weight: 0.5, partial: true}")
+    assert v.validate(make(tmp_path, t)) == []
+    bad = t.replace("weight: 0.5", "weight: lots")
+    errs = v.validate(make(tmp_path, bad))
+    assert any("papers.Mid25" in e for e in errs)
+
+
+def test_year_keys_become_strings(tmp_path):
+    c = v.load_valid(make(tmp_path))
+    assert list(c["front"]["papers"]) == ["2024"]

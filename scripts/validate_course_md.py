@@ -178,6 +178,23 @@ def validate(path) -> list[str]:
         errs.append(f"front matter: format must be one of {sorted(FORMATS)}")
     if "paper_total" in fm and not isinstance(fm["paper_total"], (int, float)):
         errs.append("front matter: paper_total must be a number")
+    papers = fm.get("papers")
+    if papers is not None:
+        if not isinstance(papers, dict):
+            errs.append("front matter: papers must map paper id -> {year, weight, total, partial}")
+        else:
+            for pid, meta in papers.items():
+                meta = meta or {}
+                if not isinstance(meta, dict):
+                    errs.append(f"front matter: papers.{pid} must be a mapping")
+                    continue
+                for key, typ in (("year", int), ("weight", (int, float)), ("total", (int, float)),
+                                 ("partial", bool)):
+                    if key in meta and (not isinstance(meta[key], typ) or isinstance(meta[key], bool) != (typ is bool)):
+                        errs.append(f"front matter: papers.{pid}.{key} has the wrong type")
+                unknown = set(meta) - {"year", "weight", "total", "partial"}
+                if unknown:
+                    errs.append(f"front matter: papers.{pid} has unknown keys {sorted(unknown)}")
 
     for s in REQUIRED_SECTIONS:
         if _find_section(c["sections"], s) is None:
@@ -224,6 +241,8 @@ def load_valid(path) -> dict:
         raise CourseError("course.md is invalid:\n  " + "\n  ".join(errs))
     c = load(path)
     c["book"]["page_offset"] = int(c["book"]["page_offset"])
+    if isinstance(c["front"].get("papers"), dict):      # YAML turns `2024:` into an int key
+        c["front"]["papers"] = {str(k): (v or {}) for k, v in c["front"]["papers"].items()}
     for ch in c["chapters"]:
         ch["self_rating"] = int(ch["rating_raw"])
         ch["past_papers"] = parse_past_papers(ch["past_papers_raw"])
