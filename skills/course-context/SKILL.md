@@ -18,7 +18,7 @@ Let `TM` be `${CLAUDE_PLUGIN_ROOT}/scripts/tm`.
 3. **Read course.md fully.** Keep in mind:
    - `format` (pdf or md) decides the template: `templates/*.tex` or `templates/pack.md.tmpl`.
    - **Professor conventions override the book.** When the book and the slides or the examiner disagree, use the
-     convention, and say in the output which source you followed ("examiner's method, L22 slide 7; Bhandari uses ...").
+     convention, and say in the output which source you followed ("examiner's method, L22 slide 7; the book uses ...").
    - Given-vs-must-remember lists decide which formulas get `\examgiven` / `\examremember` (Markdown: `[given]` / `[remember]`).
    - The **verified corrections log** lists known book or slide errors. Never repeat a logged error.
 4. **Page references.** The book's printed page numbers differ from PDF page numbers.

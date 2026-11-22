@@ -101,3 +101,15 @@ Known limitation: Markdown output cannot guarantee "one printed page" for the cr
 Gate 5: PASSED (setup matched expected; triage matched hand ranking; pack/formulas/mock/cram built in pdf and md;
 every planted error flagged; drill state re-queues, reorders the weakmap and moves triage).
 Gate 6: PASSED (time targets met by a wide margin; heavy commands are formulas and mock at ~2-3 min).
+
+## Phase 9: packaging (2026-11-22)
+- README (requirements mirror doctor, 3-step quick start, verification philosophy, triage limits, copyright),
+  `examples/course.example.md`, `docs/QUICKSTART.md`, plugin icon (512 px), runtime vs dev requirements.
+- Clean clone on the host: `scripts/selftest.sh` PASSED with TeX (93 tests) and with `--no-tex` (PDF gates PENDING).
+- `python:3.12-slim` container (no TeX, no poppler, no network):
+  - before installing anything, doctor reported every gap with the right `apt` commands, exit 1, format md;
+  - Markdown build ran with no TeX engine;
+  - after an offline install of the pinned wheels, selftest PASSED (88 passed, 5 skipped, PDF gates PENDING).
+  (The container had no git, so the "nothing tracked" checks were trivially true there; they ran on the host.)
+- Copyright scan: no PDFs, slides or course text tracked; no course-specific names in plugin files.
+- Gate 9: PASSED. Gate 7 (real second course): PENDING, needs the user.
