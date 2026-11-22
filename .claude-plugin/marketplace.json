@@ -1,6 +1,9 @@
 {
   "name": "tminus-marketplace",
-  "owner": { "name": "tminus contributors" },
+  "owner": {
+    "name": "tminus contributors"
+  },
+  "description": "tminus: an exam-sprint kit for Claude Code (triage, packs, drills, mock, cram) built from your own course folder.",
   "plugins": [
     {
       "name": "tminus",
