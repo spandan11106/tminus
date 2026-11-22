@@ -85,12 +85,15 @@
 
 % ---- formula sheets
 % \tmformula{label}{math}{when to use}{marker}: one sheet line, safe inside multicols.
-\newcommand{\tmformula}[4]{\par\noindent\textbf{#1}#4\par\nobreak
-  \vspace{-0.6em}\[#2\]\vspace{-0.5em}\par\nobreak{\footnotesize\textit{#3}}\par\smallskip}
-\newcommand{\tmfsection}[1]{\par\smallskip{\color{orange!70!black}\bfseries #1}\par\nobreak
-  \vspace{-0.3em}\noindent\rule{\linewidth}{0.4pt}\par\nobreak}
+% Each entry is one unbreakable block, so multicols never separates a formula from its label or note.
+\newcommand{\tmformula}[4]{\par\noindent\begin{minipage}{\linewidth}
+  \textbf{#1}#4\par\vspace{-0.5em}
+  \[#2\]
+  \vspace{-0.9em}{\footnotesize\textit{#3}}\end{minipage}\par\medskip}
+\newcommand{\tmfsection}[1]{\par\medskip\noindent\begin{minipage}{\linewidth}
+  {\color{orange!70!black}\bfseries #1}\par\vspace{-0.2em}\rule{\linewidth}{0.4pt}\end{minipage}\par\nobreak\smallskip}
 % tmsheet: two-column sheet.  tmonepage: dense one-page sheet (the brief says how to shrink if it overflows).
-\newenvironment{tmsheet}{\begin{multicols}{2}\small
+\newenvironment{tmsheet}{\begin{multicols}{2}\raggedcolumns\small
   \setlength{\abovedisplayskip}{2pt}\setlength{\belowdisplayskip}{2pt}
   \setlength{\abovedisplayshortskip}{1pt}\setlength{\belowdisplayshortskip}{1pt}}
   {\end{multicols}}

@@ -16,6 +16,25 @@ wrong is flagged with the correction and how it was checked.
 
 ---
 
+## See what it produces
+
+Sample outputs from the synthetic test course *WM2001 Widget Mechanics* (made-up subject, no real course material).
+Click a page to open the full PDF.
+
+<table>
+  <tr>
+    <td align="center"><a href="examples/samples/pack-coil-dampers.pdf"><img src="examples/samples/previews/pack-1.png" width="260" alt="Chapter pack, page 1"></a><br><b>Chapter pack</b><br>snapshot, recipes</td>
+    <td align="center"><a href="examples/samples/pack-coil-dampers.pdf"><img src="examples/samples/previews/pack-2.png" width="260" alt="Chapter pack, worked examples"></a><br><b>Worked examples</b><br>given / find / step by step</td>
+    <td align="center"><a href="examples/samples/mock-paper.pdf"><img src="examples/samples/previews/mock-1.png" width="260" alt="Mock paper"></a><br><b>Mock paper</b><br>(<a href="examples/samples/mock-answer-key.pdf">answer key</a>)</td>
+  </tr>
+</table>
+
+Also: the [cram pack](examples/samples/cram-pack.pdf), the [triage ranking](examples/samples/triage.md) and the
+[day-by-day plan](examples/samples/plan.md). In the pack, note the professor's convention box and the flagged book
+error (the book prints 73 &deg;C; the pack recomputes 7.3 &deg;C).
+
+---
+
 ## Contents
 1. [Requirements](#1-requirements)
 2. [Install](#2-install)

@@ -9,6 +9,7 @@
 /progress/
 *.pdf
 !tests/fixtures/expected/*.pdf
+!examples/samples/*.pdf
 # python
 .venv/
 __pycache__/

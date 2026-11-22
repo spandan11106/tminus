@@ -58,7 +58,8 @@ else
 fi
 
 step "no copyrighted material tracked"
-bad="$(git ls-files 2>/dev/null | grep -Ei '\.(pdf|pptx?|docx?|djvu|epub)$' || true)"
+# examples/samples/ holds outputs generated from the SYNTHETIC toy course only
+bad="$(git ls-files 2>/dev/null | grep -Ei '\.(pdf|pptx?|docx?|djvu|epub)$' | grep -v '^examples/samples/' || true)"
 if [ -n "$bad" ]; then echo "FAIL tracked documents:"; echo "$bad"; fail=1; else echo "OK   no PDFs/slides tracked"; fi
 
 step "every plugin file is tracked by git (none hidden by .gitignore)"
