@@ -113,3 +113,27 @@ Gate 6: PASSED (time targets met by a wide margin; heavy commands are formulas a
   (The container had no git, so the "nothing tracked" checks were trivially true there; they ran on the host.)
 - Copyright scan: no PDFs, slides or course text tracked; no course-specific names in plugin files.
 - Gate 9: PASSED. Gate 7 (real second course): PENDING, needs the user.
+
+## Phase 7: real second course, EE3005 Electrical Machines (2026-11-22)
+Test setup chosen by the user: exam pretended 3 days away (2026-11-25 09:00), end-sem scope (Chapman ch 2, 4-7),
+4 h/day, all ratings 3, closed book, conventions to be read from the slides. Headless `claude -p`, sonnet; the
+setup question batch was relayed to the user and answered through `--resume`.
+
+| command | wall time | cost (USD) | result |
+|---|---|---|---|
+| /tminus:setup (+ resume with answers) | 157 s + 82 s | 0.53 + 0.84 | 115 docs inventoried, duplicates noticed, 5 image-only PDFs flagged, offset 24 via OCR on 3 pages, both papers sum to 50, 5 slide conventions recorded with slide refs, midsem key error kept as candidate |
+| /tminus:triage | 15 s | 0.13 | ranked 6, 2, 5, 4 / 7 cut (see findings) |
+| /tminus:pack tier-A (ch 6, 2) | 371 s | 1.35 | 4 + 5 pages, 73 numbers recomputed, paper ambiguities flagged, one answer marked [UNVERIFIED] |
+| /tminus:mock | 379 s | 1.26 | 25 x 2-mark multi-correct paper like End25, 57 numbers OK, verifier 25/25 MATCH (re-ran the verifier rather than hand-editing its file) |
+| /tminus:cram | 153 s | 0.65 | 5 pages; flags its own unverified derivations |
+
+Course-specific problems found and fixed **in the plugin**:
+1. Scanned PDFs (full Chapman scan, GATE sets): added `scripts/pdf_text.py` (scan + OCR fallback via PyMuPDF and
+   tesseract) and an optional tesseract item in doctor; setup and course-context use it.
+2. Paper recency came from string order ("Mid25" > "End25"): added an optional `papers:` front-matter block (year,
+   weight, total, partial), year parsed from ids otherwise; partial papers skip the totals check. Tests added.
+3. Study time came from whole-chapter page counts (Chapman IM chapter, 93 pages, cut to tier X); the setup brief now
+   records the taught page range.
+4. Packs were not visually checked; the pack skill now renders and views pages before finishing.
+5. Setup in a non-interactive run stops at the question batch and writes drafts (correct behaviour, documented).
+Not run on the real course: an interactive drill (it needs the student; the toy dry run covered the loop).
