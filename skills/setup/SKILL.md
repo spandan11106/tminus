@@ -18,7 +18,9 @@ follow it. Work in the current folder (the course folder). Never copy course fil
 5. **[ASK USER]** one batch with AskUserQuestion or a short numbered list: exam date/time, hours per day, book
    policy and what is printed, self-rating 1-5 per examinable chapter, and the professor-vs-book question.
    Show any convention you found in the slides and ask the user to confirm it.
-6. Draft the given-vs-must-remember lists from the past papers.
+6. Draft the given-vs-must-remember lists from the past papers. Book or slide errors you found go to
+   `progress/corrections_candidates.md` with how you verified them; move a row into course.md's corrections log
+   only after the user confirms it (include them in the step-5 batch when you already know them).
 7. Write `course.md` from `${CLAUDE_PLUGIN_ROOT}/templates/course.template.md` (format `pdf` or `md`), plus
    `sprint/signals.json`. Run `TM validate_course_md course.md` and fix until it passes.
 8. Finish with: the low-confidence mappings only, the conventions recorded, and "next: /tminus:triage".

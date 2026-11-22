@@ -23,7 +23,8 @@ BOOK_POLICIES = {"closed", "open", "formula-sheet-allowed"}
 FORMATS = {"pdf", "md"}
 REQUIRED_SECTIONS = ["Book", "Chapters", "Professor conventions",
                      "Given vs must-remember formulas", "Verified corrections log"]
-PAPER_RE = re.compile(r"^\s*(?P<paper>\S+)\s+(?P<q>[^()]+?)\s*\((?P<m>\d+(?:\.\d+)?)\)\s*$")
+# "<paper> <question> (<marks>)"; the question label may itself contain parentheses: "2024 Q1(iv) (1)"
+PAPER_RE = re.compile(r"^\s*(?P<paper>\S+)\s+(?P<q>.+?)\s*\((?P<m>\d+(?:\.\d+)?)\)\s*$")
 
 
 class CourseError(Exception):
@@ -107,6 +108,20 @@ def parse_past_papers(cell: str) -> list[dict]:
     return out
 
 
+def _split_list(cell: str) -> list[str]:
+    """Split a comma list, ignoring commas inside parentheses: 'A1 (P1, P2), A2' -> 2 items."""
+    out, depth, buf = [], 0, ""
+    for ch in cell:
+        depth += (ch == "(") - (ch == ")")
+        if ch == "," and depth == 0:
+            out.append(buf)
+            buf = ""
+        else:
+            buf += ch
+    out.append(buf)
+    return [x.strip() for x in out if x.strip() and x.strip() != "-"]
+
+
 def _parse_pages(cell: str):
     m = re.fullmatch(r"\s*(\d+)\s*[-–]\s*(\d+)\s*", cell or "")
     return (int(m.group(1)), int(m.group(2))) if m else None
@@ -123,8 +138,8 @@ def load(path) -> dict:
         cid, title, pages, lec, asg, papers, rating = cells[:7]
         chapters.append({
             "id": cid, "title": title, "pages_raw": pages, "pages": _parse_pages(pages),
-            "lectures": [x.strip() for x in lec.split(",") if x.strip() and x.strip() != "-"],
-            "assignments": [x.strip() for x in asg.split(",") if x.strip() and x.strip() != "-"],
+            "lectures": _split_list(lec),
+            "assignments": _split_list(asg),
             "past_papers_raw": papers, "rating_raw": rating,
         })
     return {"path": str(path), "dir": str(path.parent), "front": fm, "sections": secs,

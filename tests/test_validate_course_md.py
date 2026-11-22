@@ -81,3 +81,15 @@ def test_cli_exit_codes(tmp_path):
     bad = tmp_path / "bad"; bad.mkdir()
     p = make(bad, with_book=False)
     assert v.main([str(p)]) == 1
+
+
+def test_question_labels_with_parentheses():
+    assert v.parse_past_papers("2024 Q1(iv) (1); 2024 Q2(b) (6.5)") == [
+        {"paper": "2024", "question": "Q1(iv)", "marks": 1.0},
+        {"paper": "2024", "question": "Q2(b)", "marks": 6.5}]
+
+
+def test_list_cells_keep_parenthesised_detail(tmp_path):
+    t = TEMPLATE.read_text().replace("| L01, L02 | A1 |", "| L01, L02 | A1 (P1, P2), A2 (P3) |")
+    c = v.load_valid(make(tmp_path, t))
+    assert c["chapters"][0]["assignments"] == ["A1 (P1, P2)", "A2 (P3)"]
