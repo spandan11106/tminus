@@ -8,4 +8,4 @@ corrections log, `progress/errors.md` and the past papers.
 4. Last year's paper solved in exam style (reuse pack solutions; verify again).
 5. Exam-day checklist: units on every answer, what is printed on the paper, book policy, calculator mode
    (degrees/radians), standard values to state as assumptions, time per mark.
-Output `cram/cram.(pdf|md)`. Full verify pass.
+Output `cram/cram.(pdf|md)`. Full verify pass. Page previews you render to check layout go in `.tminus/`, not `cram/`.

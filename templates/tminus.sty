@@ -71,13 +71,14 @@
   \vspace{-0.6em}\[#2\]\vspace{-0.5em}\par\nobreak{\footnotesize\textit{#3}}\par\smallskip}
 \newcommand{\tmfsection}[1]{\par\smallskip{\color{orange!70!black}\bfseries #1}\par\nobreak
   \vspace{-0.3em}\noindent\rule{\linewidth}{0.4pt}\par\nobreak}
-% tmsheet: two-column sheet.  tmonepage: dense one-page sheet; content shrinks if needed.
+% tmsheet: two-column sheet.  tmonepage: dense one-page sheet (the brief says how to shrink if it overflows).
 \newenvironment{tmsheet}{\begin{multicols}{2}\small
   \setlength{\abovedisplayskip}{2pt}\setlength{\belowdisplayskip}{2pt}
   \setlength{\abovedisplayshortskip}{1pt}\setlength{\belowdisplayshortskip}{1pt}}
   {\end{multicols}}
-\newenvironment{tmonepage}[1][3]{\newgeometry{margin=0.9cm,top=1.6cm,headheight=26pt,headsep=6pt}
-  \begin{multicols}{#1}\footnotesize\setlength{\parskip}{1pt}
+% \begin{tmonepage}[columns]{Title}: full-width title, then a dense multi-column page.
+\newenvironment{tmonepage}[2][3]{\newgeometry{margin=0.9cm,top=1.6cm,headheight=26pt,headsep=6pt}
+  \section*{#2}\begin{multicols}{#1}\footnotesize\setlength{\parskip}{1pt}
   \setlength{\abovedisplayskip}{1pt}\setlength{\belowdisplayskip}{1pt}}
   {\end{multicols}\restoregeometry}
 \newcommand{\tmhead}[1]{\par\smallskip{\color{blue!55!black}\bfseries #1}\par}
