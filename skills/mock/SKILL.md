@@ -3,6 +3,7 @@ name: mock
 description: "Generate a timed mock paper in the examiner's style with new numbers, plus an answer key and marking scheme where every number is recomputed and independently verified."
 argument-hint: "[--minutes N]"
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:mock $ARGUMENTS

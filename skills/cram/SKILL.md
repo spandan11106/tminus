@@ -2,6 +2,7 @@
 name: cram
 description: "Night-before pack: one page of must-remember formulas, one page of one-liners ordered by exam likelihood and your weak items, top repeated mistakes, last paper solved, exam-day checklist. No new material."
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:cram

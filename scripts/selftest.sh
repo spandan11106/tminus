@@ -12,7 +12,7 @@ fi
 fail=0; step() { printf '\n== %s\n' "$*"; }
 
 step "python deps"
-"$PY" -c "import yaml, pytest" || { echo "need PyYAML and pytest: pip install -r requirements.txt"; exit 1; }
+"$PY" -c "import yaml, pytest" || { echo "need PyYAML and pytest: pip install -r requirements-dev.txt"; exit 1; }
 
 if [ "${1:-}" = "--no-tex" ]; then
   step "hiding TeX from PATH (Markdown-mode run)"

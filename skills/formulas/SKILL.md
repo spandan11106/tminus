@@ -3,6 +3,7 @@ name: formulas
 description: "Build the two-column formula sheet across chosen chapters (formula, when to use, units, given/remember marker) and a one-page must-remember sheet, with dimensional checks."
 argument-hint: "[chapter ids | all]"
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:formulas $ARGUMENTS

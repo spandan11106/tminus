@@ -10,7 +10,8 @@ allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *), Read, Edit
 
 Run the tminus preflight and help the user fix gaps. Never run `sudo` or a system package manager yourself.
 
-1. Pick the course folder: the current directory if it holds `course.md`, else none.
+1. Pick the course folder: the current directory if it holds `course.md`, else none. Run each command below on its
+   own (no `;`, `&&` or `if` chains) so the pre-approved `tm` calls need no permission prompt.
 2. Run, from that folder if there is one:
    `${CLAUDE_PLUGIN_ROOT}/scripts/tm preflight --cache-dir .tminus`
    (without a course folder, drop `--cache-dir .tminus`).

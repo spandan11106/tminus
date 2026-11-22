@@ -3,6 +3,7 @@ name: drill
 description: "Interactive active-recall session: question-first retrieval for theory, worked-example then completion then full problem for numericals, graded against the professor's conventions, logged to progress/. Modes: a chapter id, weak, or mixed."
 argument-hint: "[<chapter id> | weak | mixed] [--minutes N]"
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:drill $ARGUMENTS

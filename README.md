@@ -73,7 +73,7 @@ course files; all outputs stay in your course folder. Test fixtures are syntheti
 
 ## Development
 ```
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
 scripts/selftest.sh            # add --no-tex to test Markdown mode
 claude plugin validate .
 ```

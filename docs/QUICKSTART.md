@@ -25,7 +25,7 @@ Then follow the plan: `/tminus:pack <chapter>`, `/tminus:drill`, `/tminus:mock`,
 
 ## Developing
 ```
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
 scripts/selftest.sh                       # unit tests, preflight simulation, template builds
 claude plugin validate .
 ```

@@ -1,7 +1,4 @@
-# runtime
+# runtime (installed by /tminus:doctor --install into the plugin venv)
 pymupdf==2.1
 PyYAML==6.0.4
 Pint==0.26.2
-# tests and fixtures
-pytest==9.2.0
-reportlab==5.1.0

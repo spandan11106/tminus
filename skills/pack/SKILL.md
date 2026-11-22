@@ -3,6 +3,7 @@ name: pack
 description: "Build a compact, verified chapter pack (60-second snapshot, recipes in the professor's method, 2-4 worked examples, formulas with given/remember markers, common traps) sized to 30-45 minutes. Argument: a chapter id, several ids, or tier-A."
 argument-hint: "<chapter id ... | tier-A>"
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:pack $ARGUMENTS

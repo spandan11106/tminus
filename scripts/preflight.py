@@ -106,7 +106,7 @@ TEXPKG = {
 }
 
 PY_REQUIRED = {"yaml": "PyYAML"}
-PY_OPTIONAL = {"pint": "Pint", "pytest": "pytest"}
+PY_OPTIONAL = {"pint": "Pint"}
 
 
 # ---------------------------------------------------------------- detection

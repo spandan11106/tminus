@@ -2,6 +2,7 @@
 name: triage
 description: "Rank chapters by expected marks per study minute for the time left, set the cut line, and write a day-by-day sprint plan with spaced review, a timed mock and the cram block. Re-run daily: it reads drill results and re-plans."
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:triage

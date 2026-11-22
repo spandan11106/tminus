@@ -3,6 +3,7 @@ name: setup
 description: "Ingest a course folder (book, slides, assignments, past papers) and write course.md: page offset, chapter map, past-paper marks, professor conventions, given vs must-remember formulas. Use --refresh after new lectures arrive."
 argument-hint: "[--refresh]"
 disable-model-invocation: true
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *)
 ---
 
 # /tminus:setup
