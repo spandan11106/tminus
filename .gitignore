@@ -1,0 +1,28 @@
+# per-course working data and generated output (never commit course material)
+courses/
+.tminus/
+outputs/
+sprint/
+packs/
+mock/
+cram/
+progress/
+*.pdf
+!tests/fixtures/expected/*.pdf
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# LaTeX aux
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+# generated toy course
+tests/fixtures/toycourse/
