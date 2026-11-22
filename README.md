@@ -24,11 +24,12 @@ wrong is flagged with the correction and how it was checked.
 5. [The sprint, step by step](#5-the-sprint-step-by-step)
 6. [Command reference](#6-command-reference)
 7. [Using it effectively](#7-using-it-effectively)
-8. [What gets written where](#8-what-gets-written-where)
-9. [Time and cost](#9-time-and-cost)
-10. [Troubleshooting](#10-troubleshooting)
-11. [How it stays correct](#11-how-it-stays-correct)
-12. [Copyright, privacy, development](#12-copyright-privacy-development)
+8. [Which subjects it suits](#8-which-subjects-it-suits)
+9. [What gets written where](#9-what-gets-written-where)
+10. [Time and cost](#10-time-and-cost)
+11. [Troubleshooting](#11-troubleshooting)
+12. [How it stays correct](#12-how-it-stays-correct)
+13. [Copyright, privacy, development](#13-copyright-privacy-development)
 
 ---
 
@@ -231,7 +232,44 @@ chapters without guilt: triage tells you what the cut costs in expected marks.
 
 ---
 
-## 8. What gets written where
+## 8. Which subjects it suits
+
+tminus was built and tested on **numerical and mixed subjects**: Design of Machine Elements (long numericals plus
+one-liners) and Electrical Machines (a multiple-choice end-sem with numerical options).
+
+| Subject type | Support today |
+|---|---|
+| Numerical / problem-solving (design, machines, mechanics, circuits) | **Full.** Recipes, worked examples, the worked-example drill loop, recomputed answer keys. |
+| Mixed (numericals + one-liners / MCQs) | **Full.** Tested on a real course. |
+| Theory-heavy with short answers (definitions, one-liners, MCQ, true/false) | **Good.** Triage, retrieval drills, the one-liners page of the cram pack and MCQ mocks all work. |
+| Theory-heavy with long answers ("explain", "discuss", 10-mark essays, derivations) | **Partial.** See below. |
+
+What works for theory-heavy subjects now:
+- `setup` and `triage` are subject-agnostic: ranking comes from past-paper marks and your self-ratings.
+- `drill` in retrieval mode is the strongest part for theory: one-liners, fill in the blanks, true/false and short
+  answers, asked first and graded after you answer, with wrong and unsure items coming back.
+- `cram` puts the most likely one-liners and your weak items on one page.
+
+Known gaps for long-answer theory papers:
+1. **Packs** are built around recipes and worked numericals. Theory chapters need *answer skeletons* instead:
+   the points examiners reward, in order, key terms, the diagram to draw, one example.
+2. **Drill grading** handles short items (correct / partial / hesitant / wrong). A 10-mark answer needs a point-wise
+   marking scheme that tells you which points you missed and logs them to `errors.md`.
+3. **Verification** is strictest for numbers; descriptive prose is only spot-checked. For theory subjects every
+   definition and claim should be checked against the source.
+4. **`formulas`** has no theory counterpart yet (a key terms, definitions and models sheet).
+5. **Diagrams drawn from memory** (supply-demand curves, the Solow growth curve, block diagrams) cannot be graded in
+   a terminal; grading a photo of a handwritten answer is a v0.2 candidate.
+
+**Planned: theory mode.** A per-chapter switch, set by `setup` from the chapter's `kind`, giving answer-skeleton packs,
+long-answer drills graded against marking schemes, full claim-checking of prose, a key-terms sheet, and long-answer
+mock questions with point-wise marking. It will be tested on a real theory-heavy course before release. Until then,
+for long-answer papers use `pack` for the overview, drill the definitions and one-liners, and paste a written answer
+into `/tminus:drill` and ask it to mark it against the source.
+
+---
+
+## 9. What gets written where
 
 Everything stays inside your course folder:
 
@@ -253,7 +291,7 @@ progress/corrections_candidates.md
 
 ---
 
-## 9. Time and cost
+## 10. Time and cost
 
 Measured on a real course (EE3005 Electrical Machines, 115 documents) and a synthetic test course, with Sonnet:
 
@@ -272,7 +310,7 @@ A full 3-day sprint on a five-chapter course is roughly $5-10. Generating only t
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 | Symptom | Fix |
 |---|---|
@@ -288,7 +326,7 @@ A full 3-day sprint on a five-chapter course is roughly $5-10. Generating only t
 
 ---
 
-## 11. How it stays correct
+## 12. How it stays correct
 
 - **Your professor wins.** `course.md` holds a professor-conventions section; every command follows it over
   the book and says which source it used.
@@ -306,7 +344,7 @@ decimal slip, a wrong printed answer) and used the slide's method where it contr
 
 ---
 
-## 12. Copyright, privacy, development
+## 13. Copyright, privacy, development
 
 **Copyright.** This repository contains no textbooks, slides or past papers, and never should. You supply your
 own files; everything generated stays in your course folder. Do not commit course material if you fork this.
