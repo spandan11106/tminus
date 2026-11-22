@@ -1,6 +1,6 @@
 ---
 name: doctor
-description: Check that this machine has what tminus needs (Python, PDF text extraction, a TeX engine and LaTeX packages) and print exact per-OS fix commands. Use when the user runs /tminus:doctor or a tminus command reports a missing tool.
+description: "Check that this machine has what tminus needs (Python, PDF text extraction, a TeX engine and LaTeX packages) and print exact per-OS fix commands. Use when the user runs /tminus:doctor or a tminus command reports a missing tool."
 argument-hint: "[--install]"
 disable-model-invocation: true
 allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/tm *), Read, Edit
