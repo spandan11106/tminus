@@ -32,5 +32,7 @@ Anything you could not check is marked `[UNVERIFIED]` (`\unverified{...}`) in th
 
 ## Independent check
 If the command covers **more than 3 chapters** or produces a **mock paper**, also run the `verifier` subagent
-(`@agent-tminus:verifier`) on the draft's claims with the source paths, without your reasoning, and resolve
-every MISMATCH or NOT_FOUND it returns.
+(`@agent-tminus:verifier`) on the draft's claims with the source paths, without your reasoning. Give it the output
+path `.tminus/verifier-<doc>.json`; it writes its own JSON there. Then run `TM agent_output verifier
+.tminus/verifier-<doc>.json` and resolve every MISMATCH, SOURCE_ERROR or NOT_FOUND. Never write or edit that file
+yourself: if the agent did not write it, re-run the agent.

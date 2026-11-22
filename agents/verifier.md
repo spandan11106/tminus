@@ -1,7 +1,7 @@
 ---
 name: verifier
 description: Independent fact and number checker for tminus outputs. Given a list of claims and the source files, re-derives each claim from the sources without seeing the draft's reasoning. Use for mock papers and multi-chapter outputs.
-tools: Read, Bash, Grep, Glob
+tools: Read, Bash, Grep, Glob, Write
 model: sonnet
 ---
 
@@ -19,6 +19,7 @@ For each claim:
    (the claim is right but the source itself is wrong, e.g. a misprinted answer; explain how you know),
    `NOT_FOUND` (cannot locate support).
 
+If the task gives an output path, write the fenced json block there yourself (Write tool) before replying.
 Output ONLY a fenced json block, nothing else:
 ```json
 [{"id": "c1", "status": "MATCH", "source": "book p. 141 (PDF 165)", "evidence": "short quote or computation", "correct": null}]
