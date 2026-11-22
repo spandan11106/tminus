@@ -1,5 +1,8 @@
 # Brief: chapter pack (tunable)
 
+**Writing style:** follow the `style.md` brief in this same folder for every question and solution (data as a list,
+one step per line with a displayed equation, options one per line).
+
 Target: the student can do this chapter's exam questions after **30-45 minutes** with the pack plus a drill.
 Not a textbook. Length: 3-6 pages (PDF) for a typical chapter.
 

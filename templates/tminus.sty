@@ -22,9 +22,10 @@
 
 \geometry{a4paper,margin=1.8cm,top=2.3cm,headheight=26pt,headsep=10pt}
 \graphicspath{{./figs/}{./}}
-\setlist{nosep,leftmargin=*}
+\setlist{leftmargin=*,itemsep=0.35em,topsep=0.4em}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.35em}
+\setlength{\parskip}{0.6em}
+\linespread{1.08}
 \sloppy
 \setlength{\emergencystretch}{3em}
 
@@ -42,8 +43,8 @@
 \renewcommand{\headrulewidth}{0.4pt}
 
 % ---- boxes
-\tcbset{tmbase/.style={breakable,enhanced,boxrule=0.6pt,arc=1.5mm,left=5pt,right=5pt,
-  top=3pt,bottom=3pt,fonttitle=\bfseries\small}}
+\tcbset{tmbase/.style={breakable,enhanced,boxrule=0.6pt,arc=1.5mm,left=8pt,right=8pt,
+  top=6pt,bottom=6pt,before skip=12pt,after skip=12pt,fonttitle=\bfseries\small}}
 \newtcolorbox{tmsnapshot}[1][60-second snapshot]{tmbase,colback=blue!4,colframe=blue!55!black,title={#1}}
 \newtcolorbox{tmrecipe}[1][Recipe]{tmbase,colback=green!4,colframe=green!45!black,title={#1}}
 \newtcolorbox{tmexample}[1][Worked example]{tmbase,colback=white,colframe=black!55,title={#1}}
@@ -61,9 +62,26 @@
 % \approxval{value}{method}: a value read from a chart or figure.
 \newcommand{\approxval}[2]{#1\textsuperscript{\,\textcolor{orange!70!black}{approx.}}\footnote{Read from #2.}}
 \newcommand{\unverified}[1]{\textcolor{orange!80!black}{[UNVERIFIED]}~#1}
-\newcommand{\tmans}[1]{\par\smallskip\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\textbf{Answer:} #1}}\par}
+\newcommand{\tmans}[1]{\par\medskip\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\textbf{Answer:} #1}}\par}
 \providecommand{\degree}{\ensuremath{^\circ}}
 \newcommand{\tmsource}[1]{\textcolor{gray!70!black}{\footnotesize(#1)}}
+
+% ---- readable questions and solutions (one idea per line, room to breathe)
+% \begin{tmgiven} \item $V = 208$ V \item ... \end{tmgiven}: the data, one item per line.
+\newenvironment{tmgiven}{\par\noindent\textbf{Given}\par\vspace{-0.3em}
+  \begin{itemize}[itemsep=0.1em,topsep=0.2em,label=\textcolor{gray}{\textbullet}]}{\end{itemize}}
+% \begin{tmfind} \item ... \end{tmfind}: what is asked, numbered (i), (ii).
+\newenvironment{tmfind}{\par\noindent\textbf{Find}\par\vspace{-0.3em}
+  \begin{enumerate}[label=(\roman*),itemsep=0.1em,topsep=0.2em]}{\end{enumerate}}
+% \begin{tmsolution} \item <what this step does> \[ equation \] ... \end{tmsolution}
+\newenvironment{tmsolution}{\par\medskip\noindent\textbf{Solution}\par\vspace{-0.2em}
+  \begin{enumerate}[label=\textbf{\arabic*.},itemsep=0.7em,topsep=0.3em]
+  \setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}}{\end{enumerate}}
+% Mock papers: \begin{tmquestion}{2}{12} text, then tmparts and/or tmoptions \end{tmquestion}
+\newenvironment{tmquestion}[2]{\par\bigskip\noindent\textbf{Q#1.}\hfill\textbf{[#2 marks]}\par\smallskip}
+  {\par\medskip}
+\newenvironment{tmparts}{\begin{enumerate}[label=(\roman*),itemsep=0.4em]}{\end{enumerate}}
+\newenvironment{tmoptions}{\begin{enumerate}[label=(\alph*),itemsep=0.15em,topsep=0.3em]}{\end{enumerate}}
 
 % ---- formula sheets
 % \tmformula{label}{math}{when to use}{marker}: one sheet line, safe inside multicols.

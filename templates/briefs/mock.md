@@ -1,5 +1,8 @@
 # Brief: mock paper (tunable)
 
+**Writing style:** follow the `style.md` brief in this same folder for every question and solution (data as a list,
+one step per line with a displayed equation, options one per line).
+
 1. Pattern: copy the structure from `exam_pattern` and the latest past paper (sections, question count, marks per
    question, choice rules, what formulas are printed in the question, style of one-liners with bracketed options).
 2. Marks per chapter follow `sprint/triage.json` expected marks (rounded to the paper's mark units), and include

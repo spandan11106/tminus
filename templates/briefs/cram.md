@@ -1,5 +1,8 @@
 # Brief: cram pack (tunable)
 
+**Writing style:** follow the `style.md` brief in this same folder for every question and solution (data as a list,
+one step per line with a displayed equation, options one per line).
+
 Night before and morning of. **No new material**: everything comes from existing packs, the deck, formula sheet,
 corrections log, `progress/errors.md` and the past papers.
 1. Page 1: must-remember formulas only (`tmonepage`, must fit one page).
