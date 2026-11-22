@@ -1,12 +1,12 @@
 # per-course working data and generated output (never commit course material)
-courses/
-.tminus/
-outputs/
-sprint/
-packs/
-mock/
-cram/
-progress/
+/courses/
+/.tminus/
+/outputs/
+/sprint/
+/packs/
+/mock/
+/cram/
+/progress/
 *.pdf
 !tests/fixtures/expected/*.pdf
 # python
