@@ -137,3 +137,13 @@ Course-specific problems found and fixed **in the plugin**:
 4. Packs were not visually checked; the pack skill now renders and views pages before finishing.
 5. Setup in a non-interactive run stops at the question batch and writes drafts (correct behaviour, documented).
 Not run on the real course: an interactive drill (it needs the student; the toy dry run covered the loop).
+
+### Gate 7 review (user, 2026-11-22)
+- User: "Content looks good, only change required is in the questions and solution writing style. Now it looks
+  too packed up, make it a bit free and better to read."
+- Fixed in the plugin: `tminus.sty` spacing (parskip 0.6em, linespread 1.08, roomier boxes) and new environments
+  `tmgiven`, `tmfind`, `tmsolution` (one step per item with one displayed equation), `tmquestion`, `tmparts`,
+  `tmoptions`; `templates/briefs/style.md` referenced by the pack, mock and cram briefs; templates updated.
+- Found while re-running: `/tminus:pack 6` only recompiled the existing .tex. Pack now regenerates by default
+  (old file kept as `.prev.tex`); `--rebuild` recompiles only.
+- User after the change: "Looks good." Gate 7: PASSED.
