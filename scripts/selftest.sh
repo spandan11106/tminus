@@ -61,5 +61,9 @@ step "no copyrighted material tracked"
 bad="$(git ls-files 2>/dev/null | grep -Ei '\.(pdf|pptx?|docx?|djvu|epub)$' || true)"
 if [ -n "$bad" ]; then echo "FAIL tracked documents:"; echo "$bad"; fail=1; else echo "OK   no PDFs/slides tracked"; fi
 
+step "every plugin file is tracked by git (none hidden by .gitignore)"
+hidden="$(git ls-files --others --ignored --exclude-standard -- .claude-plugin skills agents scripts templates 2>/dev/null | grep -v '__pycache__' || true)"
+if [ -n "$hidden" ]; then echo "FAIL ignored plugin files:"; echo "$hidden"; fail=1; else echo "OK   all plugin files trackable"; fi
+
 printf '\n'; [ $fail -eq 0 ] && echo "SELFTEST PASSED" || echo "SELFTEST FAILED"
 exit $fail
