@@ -21,4 +21,6 @@ Let `TM` be `${CLAUDE_PLUGIN_ROOT}/scripts/tm`.
 5. Seed the drill deck `progress/deck/<id>.json` with the chapter's one-liners and question items (drill brief).
 6. Follow the verify-pass skill (claims file, recompute, source checks, report at the end of the pack).
 7. Build: `TM build_doc packs/<id>.tex` (or `.md`). Fix gate failures (ASCII, overfull, placeholders) and rebuild.
+   Then render pages at low resolution into `.tminus/` (`pdftoppm -r 50 -png packs/<id>.pdf .tminus/<id>`), view
+   them, and fix anything that looks wrong (clipped boxes, broken math, empty pages).
 8. Report: output path, pages, study minutes, flags raised, and "next: /tminus:drill <id>".
