@@ -74,6 +74,11 @@
 | /tminus:formulas (pdf) | 172 s | 0.65 | 2-page sheet + 1-page must-remember; verifier 37 claims, confirmed all planted errors |
 | /tminus:cram (pdf) | 89 s | 0.39 | 4 pages; weak ch 4 items first; 2024 paper solved |
 | /tminus:doctor | 11 s | 0.10 | correct table; tm calls ran without prompts |
+| /tminus:formulas (md) | 80 s | 0.37 | Markdown sheets; dimensional checks done by hand because pint was absent (no plugin venv yet) |
+| /tminus:mock (md) | 118 s | 0.51 | Markdown paper + key; recompute 35/35; verifier 18/18 |
+| /tminus:cram (md) | 109 s | 0.50 | Markdown cram pack; noticed the corrections-log page cite (p.22 vs p.23) left by setup |
+
+Total for the full toy sprint (12 runs): about 17 min of compute and USD 4.3 on sonnet.
 
 Time to first triage plan: about 80 s of compute plus answering one question batch, far under the 15-minute
 target. Verified pack + first drill: under 5 minutes of compute (target 45 min).
@@ -87,3 +92,12 @@ Problems found by the dry run and fixed in the plugin (not in the outputs):
    full-width title argument. Layout previews go to `.tminus/`.
 6. Mock printed the key path before the attempt; it now reveals the key only after the student finishes.
 7. Doctor's compound shell line was refused by permissions; doctor now runs one command at a time.
+8. In the md mock run the model typed the verifier's statuses into a file by hand (placeholder evidence). The
+   verifier now writes its own JSON to a path it is given; skills must never write that file.
+9. Without the plugin venv, `tm` falls back to system python3 (no pint): checks still ran, but unit-aware. The
+   doctor's `--install` covers this; noted in the README requirements.
+
+Known limitation: Markdown output cannot guarantee "one printed page" for the cram and must-remember pages.
+Gate 5: PASSED (setup matched expected; triage matched hand ranking; pack/formulas/mock/cram built in pdf and md;
+every planted error flagged; drill state re-queues, reorders the weakmap and moves triage).
+Gate 6: PASSED (time targets met by a wide margin; heavy commands are formulas and mock at ~2-3 min).
