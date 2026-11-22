@@ -8,6 +8,9 @@ user-invocable: false
 
 Let `TM` be `${CLAUDE_PLUGIN_ROOT}/scripts/tm`.
 
+0. **Course folder = the directory the session started in.** Run `pwd` once and use that absolute path for every
+   later command (`cd "<path>" && ...`); never search other folders for a course. If it has no `course.md`, say
+   so and suggest `/tminus:setup` there.
 1. **Fast preflight.** From the course folder run `TM preflight --fast --cache-dir .tminus`.
    Exit 1: stop and tell the user to run `/tminus:doctor`. Exit 2: continue; if no TeX engine, use Markdown output.
 2. **Find course.md** in the current folder (else ask for the path; suggest `/tminus:setup` if none exists).
