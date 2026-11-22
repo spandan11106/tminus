@@ -27,5 +27,6 @@ Let `TM` be `${CLAUDE_PLUGIN_ROOT}/scripts/tm`.
 5. **Never silently fix the book.** If you find an error in the book or slides, flag it in the output and
    append a candidate row to `progress/corrections_candidates.md` (the recompute script does this for numbers).
    Only the user moves a candidate into the corrections log.
-6. **Read source text, not memory.** Extract pages with `pdftotext -f N -l N -layout book.pdf -` (or PyMuPDF) before
+6. **Read source text, not memory.** Extract pages with `TM pdf_text book.pdf --pages N` (OCR fallback for scanned pages)
+   or `pdftotext -f N -l N -layout book.pdf -` before
    stating a fact, limit, table value or printed answer. If you cannot find the source, mark it `[UNVERIFIED]`.

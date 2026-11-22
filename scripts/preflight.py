@@ -36,6 +36,7 @@ LOCAL_PACKAGES = {"tminus"}          # shipped with the plugin, not from TeX Liv
 # (entries marked UNVERIFIED there could not be checked).
 SYS = {
     "arch": {
+        "tesseract": "sudo pacman -S --needed tesseract tesseract-data-eng",
         "python3": "sudo pacman -S --needed python",
         "pdftotext": "sudo pacman -S --needed poppler",
         "pdftoppm": "sudo pacman -S --needed poppler",
@@ -47,6 +48,7 @@ SYS = {
         "texpkg": "sudo pacman -S --needed {pkgs}",
     },
     "debian": {
+        "tesseract": "sudo apt install tesseract-ocr",
         "python3": "sudo apt install python3 python3-venv python3-pip",
         "pdftotext": "sudo apt install poppler-utils",
         "pdftoppm": "sudo apt install poppler-utils",
@@ -57,6 +59,7 @@ SYS = {
         "texpkg": "sudo apt install {pkgs}",
     },
     "fedora": {
+        "tesseract": "sudo dnf install tesseract",
         "python3": "sudo dnf install python3",
         "pdftotext": "sudo dnf install poppler-utils",
         "pdftoppm": "sudo dnf install poppler-utils",
@@ -68,6 +71,7 @@ SYS = {
         "texpkg": "sudo dnf install {pkgs}",
     },
     "macos": {
+        "tesseract": "brew install tesseract",
         "python3": "brew install python",
         "pdftotext": "brew install poppler",
         "pdftoppm": "brew install poppler",
@@ -248,6 +252,9 @@ def run_checks() -> dict:
     items.append(item("page renderer (pdftoppm or PyMuPDF)", "optional", ok,
                       "PyMuPDF" if pymupdf else ("pdftoppm" if ok else ""),
                       None if ok else fix_for(os_class, "pdftoppm")))
+    ok = bool(which("tesseract"))
+    items.append(item("OCR for scanned PDFs (tesseract)", "optional", ok, "" if ok else "scanned pages unreadable",
+                      None if ok else fix_for(os_class, "tesseract"), status=None if ok else "WARN"))
     for mod, pkg in PY_OPTIONAL.items():
         ok = has_module(mod)
         items.append(item(f"python: {pkg}", "optional", ok, "", None if ok else pip_fix,
@@ -262,7 +269,7 @@ def run_checks() -> dict:
         "format_recommended": "pdf" if (engine and not missing_pkgs) else "md",
         "python": sys.executable,
         "tools": {t: which(t) for t in ("latexmk", "pdflatex", "tectonic", "kpsewhich",
-                                         "pdftotext", "pdftoppm")},
+                                         "pdftotext", "pdftoppm", "tesseract")},
         "versions": {"python": platform.python_version(),
                      **({engine: _version([which(engine), "--version"])} if engine else {})},
         "items": items, "exit_code": code,

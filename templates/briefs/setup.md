@@ -8,8 +8,10 @@ Classify every PDF/PPTX in the course folder (recursively, skip `.tminus/`, `spr
 - **assignment**: "Assignment", "Tutorial", "Problem set", "Homework", numbered problems, no marks table.
 - **past paper**: "Examination", "End semester", "Mid semester", "Quiz", marks in brackets, time allowed, total marks.
 - **unclassified**: list for the user; never guess silently.
-Scanned PDFs: if a PDF has (almost) no extractable text (`pdftotext` gives < 50 characters per page on average),
-report "image-only, needs OCR (e.g. `ocrmypdf in.pdf out.pdf`)". Do not continue with that file silently.
+Scanned PDFs: run `TM pdf_text <file> --scan` on every PDF. Report "image-only" and "partly scanned" files to the
+user. If tesseract is present, `TM pdf_text <file> --pages N` OCRs those pages on demand (slow: only the pages you
+need). If not, tell the user OCR is unavailable (`/tminus:doctor` gives the install command). Never continue with
+a scanned file silently. Prefer a text copy of the same document when one exists (duplicates are common).
 
 ## Page offset
 Find three body pages whose printed number you can read in the header or footer (`pdftotext -f N -l N -layout`).

@@ -11,7 +11,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 PREFLIGHT = ROOT / "scripts" / "preflight.py"
 OSREL = ROOT / "tests" / "fixtures" / "os-release"
-ALL_TOOLS = ["latexmk", "pdflatex", "kpsewhich", "pdftotext", "pdftoppm"]
+ALL_TOOLS = ["latexmk", "pdflatex", "kpsewhich", "pdftotext", "pdftoppm", "tesseract"]
 
 
 def stub(bindir: Path, name: str, body: str = "exit 0"):
@@ -104,6 +104,11 @@ def test_macos_and_wsl_and_windows(tmp_path):
     env["TMINUS_UNAME"] = "Windows 10"
     _, out = run(env)
     assert "WSL2" in out
+
+
+def test_ocr_optional_hint(tmp_path):
+    code, out = run(env_with(tmp_path, ["latexmk", "pdflatex", "kpsewhich", "pdftotext"]))
+    assert code == 2 and "sudo pacman -S --needed tesseract tesseract-data-eng" in out
 
 
 def test_tectonic_only(tmp_path):
