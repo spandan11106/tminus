@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Usage: tm <script-name> [args...]   e.g.  tm validate_course_md course.md
+# Runs scripts/<name>.py with the plugin venv Python (falls back to python3),
+# or scripts/<name>.sh with bash.
+set -euo pipefail
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_common.sh"
+name="${1:?usage: tm <script> [args...]}"; shift
+if [ -f "$TMINUS_SCRIPTS/$name.py" ]; then
+  exec "$(tminus_python)" -I "$TMINUS_SCRIPTS/$name.py" "$@"
+elif [ -f "$TMINUS_SCRIPTS/$name.sh" ]; then
+  exec bash "$TMINUS_SCRIPTS/$name.sh" "$@"
+else
+  echo "tm: no script named '$name' in $TMINUS_SCRIPTS" >&2; exit 64
+fi

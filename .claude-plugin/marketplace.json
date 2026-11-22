@@ -1,0 +1,11 @@
+{
+  "name": "tminus-marketplace",
+  "owner": { "name": "tminus contributors" },
+  "plugins": [
+    {
+      "name": "tminus",
+      "source": "./",
+      "description": "Exam sprint kit: triage, packs, drills, mock paper and cram pack from your own course folder."
+    }
+  ]
+}
