@@ -80,7 +80,7 @@ SYS = {
 SYS["wsl"] = SYS["debian"]
 SYS["unknown"] = {}
 
-# LaTeX package -> distro package (arch, debian) / TeX Live name (tlmgr). Fedora uses tex(<file>.sty).
+# LaTeX package -> distro package (arch, debian) / TeX Live name (tlmgr; Fedora: texlive-<tlmgr>).
 TEXPKG = {
     # name:       (arch,                       debian,                      tlmgr)
     "amsmath":   ("texlive-latex",            "texlive-latex-base",        "amsmath"),
@@ -189,12 +189,12 @@ def fix_for(os_class: str, key: str):
 def tex_pkg_fix(os_class: str, missing: list[str]):
     if not missing:
         return None
-    if os_class == "fedora":
-        return "sudo dnf install " + " ".join(f"'tex({p}.sty)'" for p in missing)
-    col = {"arch": 0, "debian": 1, "wsl": 1, "macos": 2}.get(os_class)
+    col = {"arch": 0, "debian": 1, "wsl": 1, "macos": 2, "fedora": 2}.get(os_class)
     if col is None:
         return None
     names = sorted({TEXPKG.get(p, (p, p, p))[col] for p in missing})
+    if os_class == "fedora":          # Fedora splits TeX Live per CTAN package: texlive-<tlmgr name>
+        names = [f"texlive-{n}" for n in names]
     return SYS[os_class]["texpkg"].format(pkgs=" ".join(names))
 
 

@@ -1,0 +1,18 @@
+\documentclass[11pt]{article}
+\usepackage{tminus}
+% a course document that defines its own \given and a given environment (the DME clash)
+\newcommand{\given}[1]{\textbf{Given:} #1}
+\newenvironment{remember}{\itshape}{}
+\tmsetcourse{XX0000 A Deliberately Very Long Course Name That Would Normally Run Into The Page Header Area}
+\tmsetdoc{Pack: An Equally Long Chapter Title For Header Overlap Testing}
+\begin{document}
+\section*{Stress}
+\given{$F=10$ kN} and \begin{remember}remember text\end{remember}.
+Marker check: $\sigma=F/A$\examgiven{} and $\tau=T r/J$\examremember.
+\flag{Book says 73\,\degree C; recomputed 7.3\,\degree C.} \approxval{1.72}{Fig.~5.1 chart}.
+\begin{tmsheet}
+\tmfsection{Group}
+\tmformula{Stress}{\sigma=\frac{F}{A}}{axial load; N, mm$^2$}{\examremember}
+\end{tmsheet}
+\tmans{$12.5$ MPa}
+\end{document}

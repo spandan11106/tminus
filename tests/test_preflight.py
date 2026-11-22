@@ -91,7 +91,7 @@ def test_missing_latex_package_debian_and_fedora(tmp_path):
     _, out = run(env_with(tmp_path, ALL_TOOLS, os_name="ubuntu", missing_sty=("tcolorbox",)))
     assert "sudo apt install texlive-latex-extra" in out
     _, out = run(env_with(tmp_path, ALL_TOOLS, os_name="fedora", missing_sty=("tcolorbox",)))
-    assert "sudo dnf install 'tex(tcolorbox.sty)'" in out
+    assert "sudo dnf install texlive-tcolorbox" in out
 
 
 def test_macos_and_wsl_and_windows(tmp_path):
