@@ -3,12 +3,12 @@
 ## 1. Get the plugin
 Either install from the marketplace in this repo:
 ```
-/plugin marketplace add <owner>/tminus        # or a local path to this folder
+/plugin marketplace add spandan11106/tminus        # or a local path to this folder
 /plugin install tminus@tminus-marketplace
 ```
 or load it straight from a clone for one session:
 ```
-git clone <repo-url> ~/tminus
+git clone https://github.com/spandan11106/tminus.git ~/tminus
 claude --plugin-dir ~/tminus
 ```
 Check it loaded: `claude --plugin-dir ~/tminus plugin details tminus` lists the skills.

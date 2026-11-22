@@ -2,7 +2,19 @@
   "name": "tminus",
   "version": "0.1.0",
   "description": "Exam in 2-3 days? Turns a course folder (book, slides, assignments, past papers) into a time-budgeted triage plan, compact chapter packs, active-recall drills, a timed mock paper and a night-before cram pack, with every number recomputed.",
-  "author": { "name": "tminus contributors" },
+  "author": {
+    "name": "tminus contributors"
+  },
   "license": "MIT",
-  "keywords": ["exam", "study", "revision", "education", "latex", "flashcards", "mock-paper"]
+  "keywords": [
+    "exam",
+    "study",
+    "revision",
+    "education",
+    "latex",
+    "flashcards",
+    "mock-paper"
+  ],
+  "homepage": "https://github.com/spandan11106/tminus",
+  "repository": "https://github.com/spandan11106/tminus"
 }

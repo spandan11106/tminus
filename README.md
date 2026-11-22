@@ -57,22 +57,22 @@ and nothing that needs `sudo` is ever run for you.
 
 Pick one.
 
-### A. From GitHub (recommended once the repo is published)
+### A. From GitHub (recommended)
 Inside Claude Code:
 ```
-/plugin marketplace add <github-user>/tminus
+/plugin marketplace add spandan11106/tminus
 /plugin install tminus@tminus-marketplace
 ```
 Or from a shell:
 ```bash
-claude plugin marketplace add <github-user>/tminus
+claude plugin marketplace add spandan11106/tminus
 claude plugin install tminus@tminus-marketplace
 ```
-Update later with `claude plugin marketplace update tminus-marketplace`.
+
 
 ### B. From a local clone (permanent install)
 ```bash
-git clone <repo-url> ~/tminus
+git clone https://github.com/spandan11106/tminus.git ~/tminus
 claude plugin marketplace add ~/tminus
 claude plugin install tminus@tminus-marketplace
 ```
