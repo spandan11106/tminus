@@ -18,7 +18,9 @@ Find three body pages whose printed number you can read in the header or footer 
 offset = pdf_page - printed_page. All three must agree; if not, report the pages and ask.
 
 ## Chapters
-From the contents page(s): chapter id (the book's own number), title, printed page range. Keep only chapters in
+From the contents page(s): chapter id (the book's own number), title, printed page range. Triage estimates study
+time from the page count, so when the lectures cover only some sections of a long chapter, record the page range of
+the sections actually taught (say so in a comment) rather than the whole chapter. Keep only chapters in
 the syllabus: ask the user which ones are examinable if the book has more.
 
 ## Mapping lectures, assignments, past-paper questions to chapters
