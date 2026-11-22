@@ -147,3 +147,12 @@ Not run on the real course: an interactive drill (it needs the student; the toy 
 - Found while re-running: `/tminus:pack 6` only recompiled the existing .tex. Pack now regenerates by default
   (old file kept as `.prev.tex`); `--rebuild` recompiles only.
 - User after the change: "Looks good." Gate 7: PASSED.
+- Re-generated EE3005 pack 6 with the new style: 243 s, USD 0.98, 7 pages (was 4), every example now
+  Given / Find / numbered steps with one display each. Phase 7 total spend about USD 7.
+
+## Status at end of build (2026-11-22)
+- Gates 0-7 and 9 PASSED. Phase 8 (v0.2 candidates: photo grading, /tminus:reflect, Anki export) not started;
+  listed in docs/IDEAS.md, to be done one at a time with tests.
+- Known limitations: Markdown mode cannot guarantee one printed page for cram/must-remember pages; triage costs
+  study time by pages (setup should record taught page ranges); headless runs cannot ask the setup questions
+  (they stop and write drafts); visual-only slide equations are read only when the model views them.
